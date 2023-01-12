@@ -38,8 +38,6 @@ stages:
   - stage: tfdeploy
     variables: 
       - group: var-group
-    condition: succeeded(tfvalidate)
-    dependsOn: tfvalidate
     jobs:
       - job: apply
         steps:
