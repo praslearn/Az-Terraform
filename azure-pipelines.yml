@@ -43,20 +43,6 @@ stages:
     jobs:
       - job: apply
         steps:
-          - task: TerraformInstaller@0
-            displayName: tfinstall
-            inputs:
-              terraformVersion: 'latest' 
-          - task: TerraformTaskV3@3
-            displayName: init
-            inputs:
-              provider: 'azurerm'
-              command: 'init'
-              backendServiceArm: 'ARM-SC'
-              backendAzureRmResourceGroupName: '$(bkstrgrg)'
-              backendAzureRmStorageAccountName: '$(bkstrg)'
-              backendAzureRmContainerName: '$(bkcontainer)'
-              backendAzureRmKey: '$(bkstrgkey)'
           - task: TerraformTaskV3@3
             displayName: plan
             inputs:
