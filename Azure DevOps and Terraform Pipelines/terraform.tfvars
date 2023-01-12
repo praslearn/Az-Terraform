@@ -1,16 +1,16 @@
 
 # Deployment Config
 
-resourcegroup_name = "<ResourceGroup>"
+resourcegroup_name = "Terraform-Demo"
 
-location = "<location>"
+location = "EastUS"
 
 tags = {
-  "Environment" = "Lab"
-  "Owner"       = "<Owner>"
+  "Environment" = "Demo"
+  "Owner"       = "Prasath"
 }
 
-vnet_name = "<VNet Name>"
+vnet_name = "tfvnet"
 
 vnet_address_space = ["10.211.0.0/16"]
 
