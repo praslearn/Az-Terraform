@@ -35,6 +35,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'validate'
+              
   - stage: tfdeploy
     dependsOn: tfvalidate
     variables: 
