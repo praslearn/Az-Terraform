@@ -1,52 +1,52 @@
 variable "bkstrgrg" {
   type        = string
   description = "The name of the backend storage account resource group"
-  default     = "<storage act resource group name>"
+  default     = "tf-demo-storage-RG"
 }
 
 variable "bkstrg" {
   type        = string
   description = "The name of the backend storage account"
-  default     = "<storage account name>"
+  default     = "tf-demo-storage"
 }
 
 variable "bkcontainer" {
   type = string
   description = "The container name for the backend config"
-  default = "<blob storage container name>"
+  default = "tf-demo-container"
 }
 
 variable "bkstrgkey" {
   type = string
   description = "The access key for the storage account"
-  default = "<storage account key>"
+  default = "tf-demo-storage-account-key"
 }
 
 variable "resourcegroup_name" {
   type        = string
   description = "The name of the resource group"
-  default     = "<resource group name>"
+  default     = "tf-demo-RG"
 }
 
 variable "location" {
   type        = string
   description = "The region for the deployment"
-  default     = "<region>"
+  default     = "EastUS"
 }
 
 variable "tags" {
   type        = map(string)
   description = "Tags used for the deployment"
   default = {
-    "Environment" = "Lab"
-    "Owner"       = "<name>"
+    "Environment" = "Demo"
+    "Owner"       = "Prasath"
   }
 }
 
 variable "vnet_name" {
   type        = string
   description = "The name of the vnet"
-  default     = "<vnet name>"
+  default     = "tf-demo-vnet"
 }
 
 variable "vnet_address_space" {
@@ -81,5 +81,5 @@ variable "subnets" {
 variable "bastionhost_name" {
   type        = string
   description = "The name of the basion host"
-  default     = "<bastion host name>"
+  default     = "tf-demo-bastionhost"
 }
