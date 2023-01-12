@@ -8,10 +8,14 @@ trigger: none
 pool:
   vmImage: ubuntu-latest
 
+variables: 
+  bkstrgrg: 'AzDevTF-RG'
+  bkstrg: 'tfstorage0202'
+  bkcontainer : 'tfstate'
+  bkstrgkey : 'azpipeline.terraform.tfstate'
+
 stages:
   - stage: tfvalidate
-    variables: 
-      - group: var-group
     jobs:
       - job: validate
         continueOnError: false
@@ -35,14 +39,26 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'validate'
-              
   - stage: tfdeploy
+    condition: succeeded(tfvalidate)
     dependsOn: tfvalidate
-    variables: 
-      - group: var-group
     jobs:
       - job: apply
         steps:
+          - task: TerraformInstaller@0
+            displayName: tfinstall
+            inputs:
+              terraformVersion: 'latest' 
+          - task: TerraformTaskV3@3
+            displayName: init
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'ARM-SC'
+              backendAzureRmResourceGroupName: '$(bkstrgrg)'
+              backendAzureRmStorageAccountName: '$(bkstrg)'
+              backendAzureRmContainerName: '$(bkcontainer)'
+              backendAzureRmKey: '$(bkstrgkey)'
           - task: TerraformTaskV3@3
             displayName: plan
             inputs:
