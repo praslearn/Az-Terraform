@@ -8,14 +8,11 @@ trigger: none
 pool:
   vmImage: ubuntu-latest
 
-variables: 
-  bkstrgrg: 'AzDevTF-RG'
-  bkstrg: 'tfstorage0202'
-  bkcontainer : 'tfstate'
-  bkstrgkey : 'azpipeline.terraform.tfstate'
 
 stages:
   - stage: tfvalidate
+    variables: 
+      - group: var-group
     jobs:
       - job: validate
         continueOnError: false
@@ -40,6 +37,8 @@ stages:
               provider: 'azurerm'
               command: 'validate'
   - stage: tfdeploy
+    variables: 
+      - group: var-group
     condition: succeeded(tfvalidate)
     dependsOn: tfvalidate
     jobs:
